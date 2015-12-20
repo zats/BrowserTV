@@ -15,7 +15,7 @@ class BrowserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabSwitchingService.start()
+        tabSwitchingService.subscribe()
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -12,13 +12,16 @@ class TabSwitchingService {
     private var timer: NSTimer?
     private(set) var interval: Double?
 
-    func start() {
+    func subscribe() {
         store.subscribe(self)
+    }
+    
+    func unsubscriber() {
+        store.unsubscribe(self)
     }
     
     func stop() {
         timer?.invalidate()
-        store.unsubscribe(self)
     }
 
     private func start(interval: Double) {
@@ -38,11 +41,19 @@ class TabSwitchingService {
 extension TabSwitchingService: StoreSubscriber {
     func newState(state: AppState) {
         if state.timer.shouldReset {
-            stop()
+            resetTimer(state)
+        } else {
+            if self.interval != state.browser.switchInterval {
+                start(state.browser.switchInterval)
+            }
         }
-        let interval = state.browser.switchInterval
-        if self.interval != interval || state.timer.shouldReset {
-            start(interval)
-        }
+    }
+    
+    private func resetTimer(state: AppState) {
+        stop()
+        store.dispatch(
+            Action(ActionKind.AcknowledgeTimerReset.rawValue)
+        )
+        start(state.browser.switchInterval)
     }
 }

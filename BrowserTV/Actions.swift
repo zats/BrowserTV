@@ -11,6 +11,7 @@ import Foundation
 enum ActionKind: String {
     case Add, Remove
     case SelectedTab, AdvanceTab
+    case AcknowledgeTimerReset
     case ShowPreferences, HidePreferences
 }
 

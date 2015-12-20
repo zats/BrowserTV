@@ -43,6 +43,8 @@ struct BrowserReducer: Reducer {
             return showPreferences(state)
         case .HidePreferences:
             return hidePreferenes(state)
+        case .AcknowledgeTimerReset:
+            return acknowledgeTimerReset(state)
         }
     }
 }
@@ -81,10 +83,13 @@ extension BrowserReducer {
 extension BrowserReducer {
     private func selectTab(var state: AppState, payload: [String: AnyObject]) -> AppState {
         guard let index = payload["index"] as? Int else {
+            assertionFailure("No index for tab selected")
             return state
         }
+        print("Selecting tab \(index)")
         state.browser.selectedTabIndex = index
         state.timer.shouldReset = true
+        print(state)
         return state
     }
     
@@ -92,12 +97,16 @@ extension BrowserReducer {
         guard let index = state.browser.selectedTabIndex else {
             return state
         }
-        state.timer.shouldReset = false
         if index == state.browser.tabs.count - 1 {
             state.browser.selectedTabIndex = 0
         } else {
             state.browser.selectedTabIndex = index + 1
         }
+        return state
+    }
+    
+    private func acknowledgeTimerReset(var state: AppState) -> AppState {
+        state.timer.shouldReset = false
         return state
     }
 }

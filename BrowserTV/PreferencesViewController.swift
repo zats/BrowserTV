@@ -14,14 +14,18 @@ class PreferencesViewController: UIViewController {
     
     var URLs: [String] = []
     
+    private let service = VoucherService()
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         store.subscribe(self)
+        service.start()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
+        service.stop()
     }
 }
 
@@ -34,6 +38,7 @@ extension PreferencesViewController {
 }
 
 extension PreferencesViewController: UITableViewDelegate {
+    
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return .Delete
     }
