@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/Swift-Flow"]
+	path = Carthage/Checkouts/Swift-Flow
+	url = https://github.com/Swift-Flow/Swift-Flow.git

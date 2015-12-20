@@ -8,6 +8,32 @@
 
 import UIKit
 
+var store = MainStore(reducer: MainReducer([
+    BrowserReducer()
+]), appState: restoreState())
+
+private func restoreState() -> AppState {
+    
+    let URLs = [
+        NSURL(string: "https://google.com")!,
+        NSURL(string: "https://mail.google.com")!,
+        NSURL(string: "https://maps.google.com")!
+    ]
+    
+    return AppState(
+        browser: BrowserState(
+            switchInterval: 5,
+            selectedTabIndex: 0,
+            tabs: URLs.map{ BrowserTabState(URL: $0) }),
+        preferences: PreferencesState(
+            // ....
+            isVisible: true,
+            URLs: URLs.map{ $0.absoluteString }
+        ),
+        timer: TimerState(shouldReset: false)
+    )
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

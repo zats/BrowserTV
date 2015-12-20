@@ -1,25 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="6185.10" systemVersion="14A360a" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="NO" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9531" systemVersion="15D9c" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="Edt-k1-vMI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Browser View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BrowserViewController" customModule="BrowserTV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xMn-1q-F7Y" customClass="Browser" customModule="BrowserTV" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xMn-1q-F7Y" secondAttribute="bottom" id="9Ko-yD-cQj"/>
+                            <constraint firstAttribute="trailing" secondItem="xMn-1q-F7Y" secondAttribute="trailing" id="Lab-BF-vqU"/>
+                            <constraint firstItem="xMn-1q-F7Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nMO-AF-R6f"/>
+                            <constraint firstItem="xMn-1q-F7Y" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xra-cw-ddg"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="browser" destination="xMn-1q-F7Y" id="frP-VM-hPm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-342" y="2875"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="bw1-1y-uBD">
+            <objects>
+                <viewController id="Edt-k1-vMI" customClass="RootViewController" customModule="BrowserTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="skT-pr-9ve"/>
+                        <viewControllerLayoutGuide type="bottom" id="lMb-nd-xX7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xf0-mG-FIO">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUi-jD-MlQ" userLabel="Browser Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="embed" id="bKw-lY-5Wa"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCm-QL-L5c" userLabel="Preferences Container View">
+                                <rect key="frame" x="1320" y="0.0" width="600" height="1080"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="5JS-5c-HL9"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="g9b-jG-e44" kind="embed" identifier="Preferences" id="mtz-QW-MjD"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="lMb-nd-xX7" firstAttribute="top" secondItem="oCm-QL-L5c" secondAttribute="bottom" id="1He-SX-Tmz"/>
+                            <constraint firstItem="oCm-QL-L5c" firstAttribute="top" secondItem="skT-pr-9ve" secondAttribute="bottom" id="5hU-Cg-07b"/>
+                            <constraint firstAttribute="trailing" secondItem="oCm-QL-L5c" secondAttribute="trailing" id="6pI-Zj-tn5"/>
+                            <constraint firstAttribute="trailing" secondItem="AUi-jD-MlQ" secondAttribute="trailing" id="buX-Fh-bST"/>
+                            <constraint firstItem="lMb-nd-xX7" firstAttribute="top" secondItem="AUi-jD-MlQ" secondAttribute="bottom" id="lW1-Ab-gaK"/>
+                            <constraint firstItem="AUi-jD-MlQ" firstAttribute="leading" secondItem="xf0-mG-FIO" secondAttribute="leading" id="mt2-nV-NRy"/>
+                            <constraint firstItem="AUi-jD-MlQ" firstAttribute="top" secondItem="skT-pr-9ve" secondAttribute="bottom" id="pRu-aD-IHM"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GZ9-Zt-cFs" appends="YES" id="iaN-5m-eoN"/>
+                            <outletCollection property="gestureRecognizers" destination="9yp-dz-FXe" appends="YES" id="zIc-yx-5J8"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="browser" destination="AUi-jD-MlQ" id="lOE-bF-exP"/>
+                        <outlet property="menuTap" destination="GZ9-Zt-cFs" id="Xi1-zU-GiO"/>
+                        <outlet property="preferences" destination="oCm-QL-L5c" id="M0J-0w-RTc"/>
+                        <outlet property="preferencesTrailing" destination="6pI-Zj-tn5" id="fO4-w5-ann"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WqK-W0-FlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GZ9-Zt-cFs">
+                    <pressTypeMask key="allowedPressTypes" menu="YES"/>
+                    <connections>
+                        <action selector="menuTapAction:" destination="Edt-k1-vMI" id="zFU-VZ-Ze2"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer enabled="NO" id="9yp-dz-FXe" userLabel="Play Tap">
+                    <pressTypeMask key="allowedPressTypes" playPause="YES"/>
+                    <connections>
+                        <action selector="playTapAction:" destination="Edt-k1-vMI" id="Upf-Vv-XJN"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-342" y="1595"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="m0n-Qu-nID">
+            <objects>
+                <viewController id="g9b-jG-e44" customClass="PreferencesViewController" customModule="BrowserTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="sJi-kb-KUb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Gb6-73-SoY">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="1080"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="WsD-4D-e9g">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1080"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <prototypes>
+                                        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="bPW-7L-Oex" style="IBUITableViewCellStyleDefault" id="a2h-c6-rPw">
+                                            <rect key="frame" x="0.0" y="54" width="600" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a2h-c6-rPw" id="y48-FG-INs">
+                                                <rect key="frame" x="0.0" y="0.0" width="584" height="66"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <subviews>
+                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bPW-7L-Oex">
+                                                        <rect key="frame" x="20" y="0.0" width="544" height="66"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </tableViewCellContentView>
+                                        </tableViewCell>
+                                    </prototypes>
+                                    <connections>
+                                        <outlet property="dataSource" destination="g9b-jG-e44" id="zqi-87-40e"/>
+                                        <outlet property="delegate" destination="g9b-jG-e44" id="AOe-tm-Uav"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="WsD-4D-e9g" firstAttribute="top" secondItem="Gb6-73-SoY" secondAttribute="top" id="R7x-KL-l1V"/>
+                                <constraint firstAttribute="bottom" secondItem="WsD-4D-e9g" secondAttribute="bottom" id="iS6-Ka-KjT"/>
+                                <constraint firstAttribute="trailing" secondItem="WsD-4D-e9g" secondAttribute="trailing" id="qkk-gQ-riw"/>
+                                <constraint firstItem="WsD-4D-e9g" firstAttribute="leading" secondItem="Gb6-73-SoY" secondAttribute="leading" id="xag-6f-oms"/>
+                            </constraints>
+                        </view>
+                        <gestureRecognizers/>
+                        <blurEffect style="dark"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Pzo-Ao-ZPg" appends="YES" id="ZCn-Oh-EDc"/>
+                        </connections>
+                    </visualEffectView>
+                    <connections>
+                        <outlet property="tableView" destination="WsD-4D-e9g" id="zZg-C7-CIA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xUz-07-aRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Pzo-Ao-ZPg" userLabel="Play/Pause Tap Gesture Recognizer">
+                    <pressTypeMask key="allowedPressTypes" playPause="YES"/>
+                    <connections>
+                        <action selector="playPauseGestureAction:" destination="g9b-jG-e44" id="LPw-lI-OiF"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1066" y="1595"/>
         </scene>
     </scenes>
 </document>

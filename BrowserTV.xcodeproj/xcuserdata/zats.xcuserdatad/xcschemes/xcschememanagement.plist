@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BrowserOSX.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>BrowserTV.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>5C2F11F71C2674DB00CE6988</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5C468D481C25075100A87F81</key>
 		<dict>
 			<key>primary</key>
