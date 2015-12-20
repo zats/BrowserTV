@@ -15,7 +15,7 @@ var store = MainStore(reducer: MainReducer([
 private func restoreState() -> AppState {
     
     let URLs = [
-        NSURL(string: "https://google.com")!,
+        NSURL(string: "https://facebook.com")!,
         NSURL(string: "https://mail.google.com")!,
         NSURL(string: "https://maps.google.com")!
     ]

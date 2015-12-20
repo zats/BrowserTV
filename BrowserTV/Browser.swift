@@ -11,13 +11,12 @@ import UIKit
 class Browser: UIView {
     private class Tab: UIView {
         var URL: NSURL!
-        let webView = MyWebView(frame: .zero, configuration: nil)
+        let webView = MyWebView.instance()
 
         convenience init(URL: NSURL) {
             self.init(frame: .zero)
             self.URL = URL
             addSubview(webView)
-            webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.2 (KHTML, like Gecko) Version/9.0.3 Safari/601.4.2"
             webView.frame = bounds
             webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             webView.loadRequest(NSURLRequest(URL: URL))

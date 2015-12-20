@@ -9,25 +9,18 @@
 #import "MyWebView.h"
 #import <dlfcn.h>
 
-@interface Configuration : NSObject
-@end
-
-@implementation Configuration
-- (instancetype)init {
-    self = [[NSClassFromString(@"WKWebViewConfiguration") alloc] init];
-    return self;
-}
-@end
-
 @implementation MyWebView
 + (void)load {
-    NSURL *uiKitURL = [NSBundle bundleForClass:[UIView class]].bundleURL;
-    NSURL *webKitURL = [[uiKitURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"WebKit.framework/WebKit"];
-    dlopen(webKitURL.relativePath.UTF8String, RTLD_NOW);
+    [self _registerUserAgent];
 }
-- (instancetype)initWithFrame:(CGRect)frame configuration:(id)configuration {
-    self = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:frame configuration:configuration ?: [[Configuration alloc] init]];
-    return self;
++ (void)_registerUserAgent {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults registerDefaults:@{
+        @"UserAgent": @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.2 (KHTML, like Gecko) Version/9.0.3 Safari/601.4.2"
+    }];
+}
++ (instancetype)instance {
+    return [[NSClassFromString(@"UIWebView") alloc] initWithFrame:CGRectZero];
 }
 - (void)loadRequest:(NSURLRequest *)request {
     // no-op

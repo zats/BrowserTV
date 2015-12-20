@@ -20,9 +20,6 @@ class VoucherService {
                 return
             }
             self.process(data: data)
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.start()
-            }
         }
     }
     

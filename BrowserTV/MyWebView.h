@@ -9,7 +9,6 @@
 @import UIKit;
 
 @interface MyWebView : UIView
-@property (nonatomic, copy) NSString *customUserAgent;
-- (instancetype)initWithFrame:(CGRect)frame configuration:(id)configuration;
++ (instancetype)instance;
 - (void)loadRequest:(NSURLRequest *)request;
 @end
