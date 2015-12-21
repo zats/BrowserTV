@@ -11,3 +11,5 @@ Use a companion OS X app to login and then pass the webpage with cookies over to
 It uses Bonjur, as long as you are on the name network, it should just work™ 
 
 ![](https://raw.githubusercontent.com/zats/BrowserTV/master/docs/app.jpg)
+
+![](https://raw.githubusercontent.com/zats/BrowserTV/master/docs/dat_icon.gif)
