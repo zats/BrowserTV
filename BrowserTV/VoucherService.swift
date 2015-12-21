@@ -12,9 +12,7 @@ class VoucherService {
     private let client = VoucherClient(uniqueSharedId: "com.zats.browser")
     
     func start() {
-        print("Started listening")
         client.startSearchingWithCompletion { data, displayName, error in
-            print("Received")
             guard let data = data else {
                 assertionFailure()
                 return
@@ -24,7 +22,6 @@ class VoucherService {
     }
     
     func stop() {
-        print("Stopped listening")
         client.stop()
     }
     

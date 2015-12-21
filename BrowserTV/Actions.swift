@@ -13,5 +13,5 @@ enum ActionKind: String {
     case SelectedTab, AdvanceTab
     case AcknowledgeTimerReset
     case ShowPreferences, HidePreferences
+    case SaveState, LoadState
 }
-

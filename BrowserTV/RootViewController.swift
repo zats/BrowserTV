@@ -10,12 +10,9 @@ import UIKit
 
 class RootViewController: UIViewController {
 
-    @IBOutlet weak var preferencesTrailing: NSLayoutConstraint!
-    
-    @IBOutlet weak var preferences: UIView!
     @IBOutlet weak var browser: UIView!
 
-    private weak var preferencesVC: PreferencesViewController!
+    private var preferencesVC: PreferencesViewController!
 
     @IBOutlet var menuTap: UITapGestureRecognizer!
     
@@ -63,7 +60,7 @@ extension RootViewController: StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     func newState(state: AppState) {
-        let isVisible = preferencesTrailing.constant == 0
+        let isVisible = preferencesVC != nil
         let shouldBeVisible = state.preferences.isVisible
         guard isVisible != shouldBeVisible else {
             return
@@ -73,17 +70,33 @@ extension RootViewController: StoreSubscriber {
         
         // vc
         if shouldBeVisible {
-            preferencesVC.beginAppearanceTransition(true, animated: true)
+            preferencesVC = storyboard!.instantiateViewControllerWithIdentifier("Preferences") as! PreferencesViewController
+            addChildViewController(preferencesVC)
+            var frame = view.frame
+            frame.size.width = 600
+            frame.origin.x = view.frame.width - frame.width
+            var initialFrame = frame
+            initialFrame.origin.x = view.frame.width
+            preferencesVC.view.frame = initialFrame
+            view.addSubview(preferencesVC.view)
+            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 300, initialSpringVelocity: 10, options: [.BeginFromCurrentState], animations: {
+                self.preferencesVC.view.frame = frame
+            }, completion: { _ in
+                self.preferencesVC.didMoveToParentViewController(self)
+            })
         } else {
-            preferencesVC.beginAppearanceTransition(false, animated: true)
+            preferencesVC.willMoveToParentViewController(nil)
+            var frame = preferencesVC.view.frame
+            frame.origin.x = view.frame.width
+            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 300, initialSpringVelocity: 10, options: [.BeginFromCurrentState], animations: {
+                self.preferencesVC.view.frame = frame
+            }, completion: { _ in
+                self.preferencesVC.view.removeFromSuperview()
+                self.preferencesVC.removeFromParentViewController()
+                self.preferencesVC = nil
+            })
         }
         
         // animate
-        preferencesTrailing.constant = shouldBeVisible ? 0 : -preferences.frame.width
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 300, initialSpringVelocity: 10, options: [.BeginFromCurrentState], animations: {
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.preferencesVC.endAppearanceTransition()
-        })
     }
 }

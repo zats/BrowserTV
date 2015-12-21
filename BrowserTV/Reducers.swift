@@ -45,6 +45,10 @@ struct BrowserReducer: Reducer {
             return hidePreferenes(state)
         case .AcknowledgeTimerReset:
             return acknowledgeTimerReset(state)
+        case .LoadState:
+            return loadState(state)
+        case .SaveState:
+            return saveState(state)
         }
     }
 }
@@ -62,6 +66,7 @@ extension BrowserReducer {
         state.browser.addTab(tab)
         state.preferences.URLs.append(URL.absoluteString)
         state.timer.shouldReset = true
+        state.preferences.isVisible = true
         return state
     }
     
@@ -111,6 +116,40 @@ extension BrowserReducer {
     }
 }
 
+// MARK: Persistance
+
+extension BrowserReducer {
+    private var statePersistanceURL: NSURL {
+        let manager = NSFileManager.defaultManager()
+        let URL = try! manager.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+        return URL.URLByAppendingPathComponent("state.json")
+    }
+    
+    func loadState(state: AppState) -> AppState {
+        guard let data = NSData(contentsOfURL: statePersistanceURL),
+            loadedState = AppState(data: data) else {
+                return state
+        }
+
+        return loadedState
+    }
+    
+    func saveState(state: AppState) -> AppState {
+        if let data = state.data {
+            do {
+                try data.writeToURL(statePersistanceURL, options: [])
+            } catch {
+                assertionFailure("Failed to persist JSON")
+            }
+        } else {
+            assertionFailure("JSON is invalid")
+        }
+        return state
+    }
+}
+
+// MARK: Preferences
+
 extension BrowserReducer {
     func showPreferences(var state: AppState) -> AppState {
         state.preferences.isVisible = true
@@ -138,5 +177,36 @@ private extension BrowserState {
         } else {
             selectedTabIndex = tabs.count - 1
         }
+    }
+}
+
+private extension AppState {
+    init?(data: NSData) {
+        guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []) else {
+            return nil
+        }
+        guard let interval = json["interval"] as? Double,
+            URLStrings = json["URLs"] as? [String],
+            URLs: [NSURL] = URLStrings.flatMap({ NSURL(string: $0) }) else {
+                return nil
+        }
+        self.browser = BrowserState(
+            switchInterval: interval,
+            selectedTabIndex: URLs.isEmpty ? nil : 0,
+            tabs: URLs.map{ BrowserTabState(URL: $0) })
+        self.timer = TimerState(shouldReset: true)
+        self.preferences = PreferencesState(
+            isVisible: false,
+            URLs: URLs.map{ $0.absoluteString }
+        )
+    }
+    
+    var data: NSData? {
+        let json = [
+            "interval": browser.switchInterval,
+            "URLs": browser.tabs.map{ $0.URL.absoluteString }
+        ]
+        let data = try? NSJSONSerialization.dataWithJSONObject(json, options: [])
+        return data
     }
 }

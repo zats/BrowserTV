@@ -8,65 +8,35 @@
 
 import UIKit
 
-var store = MainStore(reducer: MainReducer([
-    BrowserReducer()
-]), appState: restoreState())
-
-private func restoreState() -> AppState {
-    
-    let URLs = [
-        NSURL(string: "https://facebook.com")!,
-        NSURL(string: "https://mail.google.com")!,
-        NSURL(string: "https://maps.google.com")!
-    ]
-    
-    return AppState(
-        browser: BrowserState(
-            switchInterval: 5,
-            selectedTabIndex: 0,
-            tabs: URLs.map{ BrowserTabState(URL: $0) }),
-        preferences: PreferencesState(
-            // ....
-            isVisible: true,
-            URLs: URLs.map{ $0.absoluteString }
-        ),
-        timer: TimerState(shouldReset: false)
-    )
-}
+var store = MainStore(
+    reducer: MainReducer([BrowserReducer()]),
+    appState: AppState()
+)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        store.dispatch(Action(ActionKind.LoadState.rawValue))
         return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        store.dispatch(Action(ActionKind.SaveState.rawValue))
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

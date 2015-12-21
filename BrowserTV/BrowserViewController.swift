@@ -35,6 +35,8 @@ extension BrowserViewController: StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     func newState(state: AppState) {
+        browser.hidden = state.browser.tabs.isEmpty
+        
         let tabs = state.browser
         browser.URLs = tabs.tabs.map{ $0.URL }
         browser.selectedTabIndex = tabs.selectedTabIndex
