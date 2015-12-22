@@ -121,7 +121,7 @@ extension BrowserReducer {
 extension BrowserReducer {
     private var statePersistanceURL: NSURL {
         let manager = NSFileManager.defaultManager()
-        let URL = try! manager.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+        let URL = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
         return URL.URLByAppendingPathComponent("state.json")
     }
     
