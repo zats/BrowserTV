@@ -32,11 +32,12 @@ class WindowController: NSWindowController {
     
     @IBAction func _sendButtonAction(sender: AnyObject) {
         server.startAdvertisingWithRequestHandler { displayName, handler in
+            print("Sending URL: \(self.URL)")
             let data = NSMutableData()
             let coder = NSKeyedArchiver(forWritingWithMutableData: data)
             coder.encodeObject(self.URL, forKey: "URL")
             if let cookies = self.storage.cookies {
-                print("Sending cookies \(cookies)")
+                print("Sending cookies \(cookies)\n")
                 coder.encodeObject(cookies, forKey: "cookies")
             }
             coder.finishEncoding()
