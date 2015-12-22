@@ -13,8 +13,6 @@ class RootViewController: UIViewController {
     @IBOutlet weak var browser: UIView!
 
     private var preferencesVC: PreferencesViewController!
-
-    @IBOutlet var menuTap: UITapGestureRecognizer!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,15 +39,9 @@ class RootViewController: UIViewController {
 
 // MARK: Actions
 extension RootViewController {
-    @IBAction func playTapAction(sender: AnyObject) {
-        store.dispatch(
-            Action(ActionKind.ShowPreferences.rawValue)
-        )
-    }
-
     @IBAction func menuTapAction(sender: AnyObject) {
         store.dispatch(
-            Action(ActionKind.HidePreferences.rawValue)
+            Action(ActionKind.ShowPreferences.rawValue)
         )
     }
     
@@ -65,8 +57,6 @@ extension RootViewController: StoreSubscriber {
         guard isVisible != shouldBeVisible else {
             return
         }
-
-        menuTap.enabled = shouldBeVisible
         
         // vc
         if shouldBeVisible {

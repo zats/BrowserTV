@@ -54,7 +54,7 @@
                                 <string key="text">No Websites To Show,
 Please Use OS X Client To Add It</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUi-jD-MlQ" userLabel="Browser Container View">
@@ -74,26 +74,18 @@ Please Use OS X Client To Add It</string>
                             <constraint firstItem="UA9-Nd-cFg" firstAttribute="centerY" secondItem="xf0-mG-FIO" secondAttribute="centerY" id="tJU-Cq-Rxn"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="GZ9-Zt-cFs" appends="YES" id="iaN-5m-eoN"/>
                             <outletCollection property="gestureRecognizers" destination="9yp-dz-FXe" appends="YES" id="zIc-yx-5J8"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="browser" destination="AUi-jD-MlQ" id="lOE-bF-exP"/>
-                        <outlet property="menuTap" destination="GZ9-Zt-cFs" id="Xi1-zU-GiO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqK-W0-FlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="GZ9-Zt-cFs">
+                <tapGestureRecognizer id="9yp-dz-FXe" userLabel="Menu Gesture Recognizer">
                     <pressTypeMask key="allowedPressTypes" menu="YES"/>
                     <connections>
-                        <action selector="menuTapAction:" destination="Edt-k1-vMI" id="zFU-VZ-Ze2"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="9yp-dz-FXe" userLabel="Play Tap">
-                    <pressTypeMask key="allowedPressTypes" playPause="YES"/>
-                    <connections>
-                        <action selector="playTapAction:" destination="Edt-k1-vMI" id="Upf-Vv-XJN"/>
+                        <action selector="menuTapAction:" destination="Edt-k1-vMI" id="g1f-Kh-t35"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -125,7 +117,7 @@ Please Use OS X Client To Add It</string>
                                                         <rect key="frame" x="20" y="0.0" width="1864" height="66"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -149,6 +141,7 @@ Please Use OS X Client To Add It</string>
                         <blurEffect style="dark"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Pzo-Ao-ZPg" appends="YES" id="ZCn-Oh-EDc"/>
+                            <outletCollection property="gestureRecognizers" destination="GZ9-Zt-cFs" appends="YES" id="KbI-wf-Xbh"/>
                         </connections>
                     </visualEffectView>
                     <connections>
@@ -160,6 +153,12 @@ Please Use OS X Client To Add It</string>
                     <pressTypeMask key="allowedPressTypes" playPause="YES"/>
                     <connections>
                         <action selector="playPauseGestureAction:" destination="g9b-jG-e44" id="LPw-lI-OiF"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="GZ9-Zt-cFs">
+                    <pressTypeMask key="allowedPressTypes" menu="YES"/>
+                    <connections>
+                        <action selector="menuAction:" destination="g9b-jG-e44" id="NUn-vf-FpD"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -35,6 +35,11 @@ extension PreferencesViewController {
     @IBAction func playPauseGestureAction(sender: AnyObject) {
         tableView.editing = !tableView.editing
     }
+    
+    @IBAction func menuAction(sender: AnyObject) {
+        store.dispatch(Action(ActionKind.HidePreferences.rawValue))
+    }
+    
 }
 
 extension PreferencesViewController: UITableViewDelegate {
