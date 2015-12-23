@@ -14,7 +14,7 @@ class PreferencesViewController: UIViewController {
     
     var URLs: [String] = []
     
-    private let service = VoucherService()
+    private let service = CommunicationService()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

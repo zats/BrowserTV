@@ -14,11 +14,6 @@
 		5C2F11FF1C2674DC00CE6988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F11FE1C2674DC00CE6988 /* Assets.xcassets */; };
 		5C2F12021C2674DC00CE6988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F12001C2674DC00CE6988 /* Main.storyboard */; };
 		5C2F12081C2679FC00CE6988 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2F12071C2679FC00CE6988 /* WebKit.framework */; };
-		5C2F12141C26828600CE6988 /* VoucherServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F120E1C26820A00CE6988 /* VoucherServer.m */; };
-		5C2F12151C26828A00CE6988 /* VoucherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F120B1C2681FA00CE6988 /* VoucherClient.m */; };
-		5C2F121A1C26831E00CE6988 /* VoucherStreamsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F12191C26831E00CE6988 /* VoucherStreamsController.m */; };
-		5C2F121B1C26831E00CE6988 /* VoucherStreamsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F12191C26831E00CE6988 /* VoucherStreamsController.m */; };
-		5C2F121D1C26866B00CE6988 /* VoucherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F121C1C26866B00CE6988 /* VoucherService.swift */; };
 		5C468D4D1C25075100A87F81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D4C1C25075100A87F81 /* AppDelegate.swift */; };
 		5C468D4F1C25075100A87F81 /* TabSwitchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D4E1C25075100A87F81 /* TabSwitchingService.swift */; };
 		5C468D521C25075100A87F81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C468D501C25075100A87F81 /* Main.storyboard */; };
@@ -37,6 +32,8 @@
 		5C468D8B1C250AB400A87F81 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D8A1C250AB400A87F81 /* Actions.swift */; };
 		5C468D921C250FF200A87F81 /* MyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D911C250FF200A87F81 /* MyWebView.m */; };
 		5C468D971C25152900A87F81 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D961C25152900A87F81 /* Browser.swift */; };
+		5C49436E1C29CB07007AE019 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C49436D1C29CB07007AE019 /* CommunicationService.swift */; };
+		5C8FAF2C1C29FF4C0077D74D /* Multipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8FAF2B1C29FF4C0077D74D /* Multipeer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,16 +46,8 @@
 		5C2F12011C2674DC00CE6988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C2F12031C2674DC00CE6988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2F12071C2679FC00CE6988 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		5C2F120A1C2681FA00CE6988 /* VoucherClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoucherClient.h; path = Carthage/Checkouts/Voucher/Voucher/Client/VoucherClient.h; sourceTree = "<group>"; };
-		5C2F120B1C2681FA00CE6988 /* VoucherClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VoucherClient.m; path = Carthage/Checkouts/Voucher/Voucher/Client/VoucherClient.m; sourceTree = "<group>"; };
-		5C2F120D1C26820A00CE6988 /* VoucherServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoucherServer.h; path = Carthage/Checkouts/Voucher/Voucher/Server/VoucherServer.h; sourceTree = "<group>"; };
-		5C2F120E1C26820A00CE6988 /* VoucherServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VoucherServer.m; path = Carthage/Checkouts/Voucher/Voucher/Server/VoucherServer.m; sourceTree = "<group>"; };
 		5C2F12131C26826100CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		5C2F12161C2682A400CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
-		5C2F12171C26831E00CE6988 /* VoucherCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoucherCommon.h; path = Carthage/Checkouts/Voucher/Voucher/VoucherCommon.h; sourceTree = "<group>"; };
-		5C2F12181C26831E00CE6988 /* VoucherStreamsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VoucherStreamsController.h; path = Carthage/Checkouts/Voucher/Voucher/VoucherStreamsController.h; sourceTree = "<group>"; };
-		5C2F12191C26831E00CE6988 /* VoucherStreamsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VoucherStreamsController.m; path = Carthage/Checkouts/Voucher/Voucher/VoucherStreamsController.m; sourceTree = "<group>"; };
-		5C2F121C1C26866B00CE6988 /* VoucherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoucherService.swift; sourceTree = "<group>"; };
 		5C468D491C25075100A87F81 /* BrowserTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C468D4C1C25075100A87F81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C468D4E1C25075100A87F81 /* TabSwitchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitchingService.swift; sourceTree = "<group>"; };
@@ -80,6 +69,9 @@
 		5C468D8E1C250F6900A87F81 /* MyWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWebView.h; sourceTree = "<group>"; };
 		5C468D911C250FF200A87F81 /* MyWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWebView.m; sourceTree = "<group>"; };
 		5C468D961C25152900A87F81 /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
+		5C49436D1C29CB07007AE019 /* CommunicationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationService.swift; sourceTree = "<group>"; };
+		5C8FAF2A1C29FF4C0077D74D /* Multipeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multipeer.h; sourceTree = "<group>"; };
+		5C8FAF2B1C29FF4C0077D74D /* Multipeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Multipeer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				5C468D4E1C25075100A87F81 /* TabSwitchingService.swift */,
-				5C2F121C1C26866B00CE6988 /* VoucherService.swift */,
+				5C49436D1C29CB07007AE019 /* CommunicationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -121,20 +113,6 @@
 				5C2F12131C26826100CE6988 /* Bridging.h */,
 			);
 			path = BrowserOSX;
-			sourceTree = "<group>";
-		};
-		5C2F12091C2681D200CE6988 /* Voucher */ = {
-			isa = PBXGroup;
-			children = (
-				5C2F12171C26831E00CE6988 /* VoucherCommon.h */,
-				5C2F12181C26831E00CE6988 /* VoucherStreamsController.h */,
-				5C2F12191C26831E00CE6988 /* VoucherStreamsController.m */,
-				5C2F120D1C26820A00CE6988 /* VoucherServer.h */,
-				5C2F120E1C26820A00CE6988 /* VoucherServer.m */,
-				5C2F120A1C2681FA00CE6988 /* VoucherClient.h */,
-				5C2F120B1C2681FA00CE6988 /* VoucherClient.m */,
-			);
-			name = Voucher;
 			sourceTree = "<group>";
 		};
 		5C468D401C25075100A87F81 = {
@@ -209,7 +187,6 @@
 		5C468D7C1C25085F00A87F81 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				5C2F12091C2681D200CE6988 /* Voucher */,
 				5C468D641C25085D00A87F81 /* SwiftFlow */,
 			);
 			name = Vendor;
@@ -244,6 +221,8 @@
 			children = (
 				5C468D8E1C250F6900A87F81 /* MyWebView.h */,
 				5C468D911C250FF200A87F81 /* MyWebView.m */,
+				5C8FAF2A1C29FF4C0077D74D /* Multipeer.h */,
+				5C8FAF2B1C29FF4C0077D74D /* Multipeer.m */,
 			);
 			name = Hacks;
 			sourceTree = "<group>";
@@ -376,9 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C2F121B1C26831E00CE6988 /* VoucherStreamsController.m in Sources */,
 				5C2F11FB1C2674DC00CE6988 /* AppDelegate.swift in Sources */,
-				5C2F12141C26828600CE6988 /* VoucherServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,10 +368,10 @@
 				5C468D4F1C25075100A87F81 /* TabSwitchingService.swift in Sources */,
 				5C468D921C250FF200A87F81 /* MyWebView.m in Sources */,
 				5C468D741C25085D00A87F81 /* MainStore.swift in Sources */,
-				5C2F12151C26828A00CE6988 /* VoucherClient.m in Sources */,
-				5C2F121A1C26831E00CE6988 /* VoucherStreamsController.m in Sources */,
 				5C468D801C25088000A87F81 /* AppState.swift in Sources */,
+				5C49436E1C29CB07007AE019 /* CommunicationService.swift in Sources */,
 				5C468D7A1C25085D00A87F81 /* Coding.swift in Sources */,
+				5C8FAF2C1C29FF4C0077D74D /* Multipeer.m in Sources */,
 				5C468D971C25152900A87F81 /* Browser.swift in Sources */,
 				5C468D7B1C25085D00A87F81 /* TypeHelper.swift in Sources */,
 				5C468D751C25085D00A87F81 /* Reducer.swift in Sources */,
@@ -406,7 +383,6 @@
 				5C468D761C25085D00A87F81 /* State.swift in Sources */,
 				5C2F11F21C2602A800CE6988 /* BrowserViewController.swift in Sources */,
 				5C468D731C25085D00A87F81 /* MainReducer.swift in Sources */,
-				5C2F121D1C26866B00CE6988 /* VoucherService.swift in Sources */,
 				5C468D8B1C250AB400A87F81 /* Actions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -585,6 +561,7 @@
 				5C2F12051C2674DC00CE6988 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5C468D441C25075100A87F81 /* Build configuration list for PBXProject "BrowserTV" */ = {
 			isa = XCConfigurationList;

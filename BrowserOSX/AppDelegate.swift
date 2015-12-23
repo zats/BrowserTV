@@ -8,7 +8,7 @@
 
 import Cocoa
 import WebKit
-
+import MultipeerConnectivity
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -19,7 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 class WindowController: NSWindowController {
     
     private var storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-    private let server = VoucherServer(uniqueSharedId: "com.zats.browser")
+    private var advertiser: MCNearbyServiceAdvertiser!
+    private var connectedSessoins: Set<MCSession> = []
     
     @IBOutlet weak var textField: NSTextField!
     
@@ -28,21 +29,30 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.titleVisibility = .Hidden
+        
+        let peer = MCPeerID(displayName: NSHost.currentHost().localizedName ?? NSUUID().UUIDString)
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "browser-tv")
+
+        advertiser.delegate = self
+        advertiser.startAdvertisingPeer()
     }
     
     @IBAction func _sendButtonAction(sender: AnyObject) {
-        server.startAdvertisingWithRequestHandler { displayName, handler in
-            print("Sending URL: \(self.URL)")
-            let data = NSMutableData()
-            let coder = NSKeyedArchiver(forWritingWithMutableData: data)
-            coder.encodeObject(self.URL, forKey: "URL")
-            if let cookies = self.storage.cookies {
-                print("Sending cookies \(cookies)\n")
-                coder.encodeObject(cookies, forKey: "cookies")
+        guard URL != nil else {
+            return
+        }
+        
+        let payload = [
+            "URL": URL.absoluteString
+//            "cookies": storage.cookies?.flatMap{ $0.properties } ?? []
+        ]
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(payload, options: [])
+        connectedSessoins.forEach{ session in
+            do {
+                try session.sendData(jsonData, toPeers: session.connectedPeers, withMode: .Reliable)
+            } catch {
+                assertionFailure()
             }
-            coder.finishEncoding()
-            handler(data, nil)
-            self.server.stop()
         }
     }
     
@@ -57,6 +67,30 @@ class WindowController: NSWindowController {
         
         let request = NSURLRequest(URL: URL)
         controller.webView.mainFrame.loadRequest(request)
+    }
+}
+
+extension WindowController: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
+        let peerId = advertiser.myPeerID
+        let session = MCSession(peer: peerId, securityIdentity: nil, encryptionPreference: .None)
+        connectedSessoins.insert(session)
+        invitationHandler(true, session)
+    }
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError) {
+        
+    }
+    
+}
+
+extension WindowController: DTBonjourServerDelegate {
+    func bonjourServer(server: DTBonjourServer!, didAcceptConnection connection: DTBonjourDataConnection!) {
+        print("Server \(server) did accept connection \(connection)")
+    }
+    
+    func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
+        print("Server \(server) did receive object \(object) on connection \(connection)")
     }
 }
 
@@ -81,25 +115,3 @@ extension NSHTTPCookieStorage {
 
     }
 }
-
-//private extension NSHTTPCookieStorage {
-//    var data: [NSData]? {
-//        guard let cookies = cookies else {
-//            return nil
-//        }
-//        return cookies.flatMap{ $0.data }
-//    }
-//}
-//
-//private extension NSHTTPCookie {
-//    var data: NSData? {
-//        guard let properties = properties else {
-//            return nil
-//        }
-//        let data = NSMutableData()
-//        let coder = NSKeyedArchiver(forWritingWithMutableData: data)
-//        coder.encodeObject(properties)
-//        coder.finishEncoding()
-//        return data
-//    }
-//}
