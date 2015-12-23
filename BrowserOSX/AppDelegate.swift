@@ -43,14 +43,15 @@ class WindowController: NSWindowController {
         }
         
         let website = Website(URL: URL, cookies: storage.cookies ?? [])
-        let json = website.jsonValue
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(json, options: [])
-        connectedSessoins.forEach{ session in
-            do {
-                try session.sendData(jsonData, toPeers: session.connectedPeers, withMode: .Reliable)
-            } catch {
-                assertionFailure()
-            }
+        let data = website.data
+        connectedSessoins
+            .filter{!$0.connectedPeers.isEmpty}
+            .forEach{ session in
+                do {
+                    try session.sendData(data, toPeers: session.connectedPeers, withMode: .Reliable)
+                } catch {
+                    assertionFailure()
+                }
         }
     }
     
@@ -72,6 +73,7 @@ extension WindowController: MCNearbyServiceAdvertiserDelegate {
     func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void) {
         let peerId = advertiser.myPeerID
         let session = MCSession(peer: peerId, securityIdentity: nil, encryptionPreference: .None)
+        session.delegate = self
         connectedSessoins.insert(session)
         invitationHandler(true, session)
     }

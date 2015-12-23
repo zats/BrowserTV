@@ -53,9 +53,8 @@ extension CommunicationService: MyNearbyServiceBrowserDelegate {
 extension CommunicationService: MySessionDelegate {
     func session(session: MySession, didReceiveData data: NSData, fromPeer peerID: MyPeerID) {
         print(__FUNCTION__)
-        guard let rawJson = try? NSJSONSerialization.JSONObjectWithData(data, options: []), json = rawJson as? [String: AnyObject],
-            website = Website(jsonValue: json) else {
-            assertionFailure("Received entity is not a valid JSON")
+        guard let website = Website(data: data) else {
+            assertionFailure("Received entity is not a valid website")
             return
         }
         
