@@ -126,6 +126,9 @@ extension BrowserReducer {
 // MARK: Persistance
 
 extension BrowserReducer {
+    private var defaults: NSUserDefaults {
+        return NSUserDefaults.standardUserDefaults()
+    }
     private var statePersistanceURL: NSURL {
         let manager = NSFileManager.defaultManager()
         let URL = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
@@ -133,24 +136,13 @@ extension BrowserReducer {
     }
     
     func loadState(state: AppState) -> AppState {
-        guard let data = NSData(contentsOfURL: statePersistanceURL),
-            loadedState = AppState(data: data) else {
-                return state
-        }
-
-        return loadedState
+        return AppState(json: defaults.dictionaryRepresentation()) ?? state
     }
     
     func saveState(state: AppState) -> AppState {
-        if let data = state.data {
-            do {
-                try data.writeToURL(statePersistanceURL, options: [])
-            } catch {
-                assertionFailure("Failed to persist JSON")
-            }
-        } else {
-            assertionFailure("JSON is invalid")
-        }
+        let data = state.jsonValue
+        defaults.setValuesForKeysWithDictionary(data)
+        defaults.synchronize()
         return state
     }
 }
@@ -188,10 +180,7 @@ private extension BrowserState {
 }
 
 private extension AppState {
-    init?(data: NSData) {
-        guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []) else {
-            return nil
-        }
+    init?(json: [String: AnyObject]) {
         guard let interval = json["interval"] as? Double,
             URLStrings = json["URLs"] as? [String],
             URLs: [NSURL] = URLStrings.flatMap({ NSURL(string: $0) }) else {
@@ -208,12 +197,11 @@ private extension AppState {
         )
     }
     
-    var data: NSData? {
-        let json = [
+    var jsonValue: [String: AnyObject] {
+        let json: [String: AnyObject] = [
             "interval": browser.switchInterval,
             "URLs": browser.tabs.map{ $0.URL.absoluteString }
         ]
-        let data = try? NSJSONSerialization.dataWithJSONObject(json, options: [])
-        return data
+        return json
     }
 }
