@@ -8,7 +8,10 @@
 
 import Foundation
 
+
 struct Website {
+    typealias SerializedCookies = [String: String]
+    
     let URL: NSURL
     let cookies: [NSHTTPCookie]
     
@@ -19,27 +22,24 @@ struct Website {
 }
 
 extension Website {
-    init?(jsonValue: [String: AnyObject]) {
-        guard let URLString = jsonValue["URL"] as? String, URL = NSURL(string: URLString) else {
+    init?(data: NSData) {
+        let coder = NSKeyedUnarchiver(forReadingWithData: data)
+        guard let URL = coder.decodeObjectForKey("URL") as? NSURL else {
             return nil
         }
         self.URL = URL
-        guard let cookies = jsonValue["cookies"] as? [[String: String]] else {
+        guard let cookies = coder.decodeObjectForKey("cookies") as? [NSHTTPCookie] else {
             return nil
         }
-        self.cookies = cookies.flatMap{ NSHTTPCookie.cookiesWithResponseHeaderFields($0, forURL: URL) }
+        self.cookies = cookies
     }
     
-    var jsonValue: [String: AnyObject] {
-        return [
-            "URL": URL.absoluteString,
-            "cookies": cookies.jsonValue
-        ]
-    }
-}
-
-extension Array where Element: NSHTTPCookie {
-    var jsonValue: [String: String] {
-        return NSHTTPCookie.requestHeaderFieldsWithCookies(self)
+    var data: NSData {
+        let data = NSMutableData()
+        let coder = NSKeyedArchiver(forWritingWithMutableData: data)
+        coder.encodeObject(URL, forKey: "URL")
+        coder.encodeObject(cookies, forKey: "cookies")
+        coder.finishEncoding()
+        return data
     }
 }
