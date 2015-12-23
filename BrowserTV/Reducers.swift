@@ -58,16 +58,23 @@ struct BrowserReducer: Reducer {
 
 extension BrowserReducer {
     private func addBrowserTab(var state: AppState, payload: [String: AnyObject]) -> AppState {
-        guard let URL = payload["URL"] as? NSURL else {
-            assertionFailure("Add tab requires URL")
-            return state
+        guard let URL = payload["URL"] as? NSURL,
+            cookies = payload["cookies"] as? [NSHTTPCookie] else {
+                assertionFailure("Add tab requires URL and cookies")
+                return state
         }
+        applyCookies(cookies)
         let tab = BrowserTabState(URL: URL)
         state.browser.addTab(tab)
         state.preferences.URLs.append(URL.absoluteString)
         state.timer.shouldReset = true
         state.preferences.isVisible = true
         return state
+    }
+    
+    private func applyCookies(cookies: [NSHTTPCookie]) {
+        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        cookies.forEach{ storage.setCookie($0) }
     }
     
     private func removeBrowserTab(var state: AppState, payload: [String: AnyObject]) -> AppState {
