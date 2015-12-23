@@ -52,4 +52,16 @@
     return [[NSClassFromString(@"MCNearbyServiceBrowser") alloc] initWithPeer:peer serviceType:serviceType];
 }
 
+- (void)invitePeer:(MyPeerID *)peer toSession:(MySession *)session withContext:(NSData *)context timeout:(NSTimeInterval)timeout {
+    // no-op
+}
+
+- (void)startBrowsingForPeers {
+    // no-op
+}
+
+- (void)stopBrowsingForPeers {
+    // no-op
+}
+
 @end
