@@ -42,11 +42,9 @@ class WindowController: NSWindowController {
             return
         }
         
-        let payload = [
-            "URL": URL.absoluteString
-//            "cookies": storage.cookies?.flatMap{ $0.properties } ?? []
-        ]
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(payload, options: [])
+        let website = Website(URL: URL, cookies: storage.cookies ?? [])
+        let json = website.jsonValue
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(json, options: [])
         connectedSessoins.forEach{ session in
             do {
                 try session.sendData(jsonData, toPeers: session.connectedPeers, withMode: .Reliable)
@@ -82,16 +80,6 @@ extension WindowController: MCNearbyServiceAdvertiserDelegate {
         
     }
     
-}
-
-extension WindowController: DTBonjourServerDelegate {
-    func bonjourServer(server: DTBonjourServer!, didAcceptConnection connection: DTBonjourDataConnection!) {
-        print("Server \(server) did accept connection \(connection)")
-    }
-    
-    func bonjourServer(server: DTBonjourServer!, didReceiveObject object: AnyObject!, onConnection connection: DTBonjourDataConnection!) {
-        print("Server \(server) did receive object \(object) on connection \(connection)")
-    }
 }
 
 

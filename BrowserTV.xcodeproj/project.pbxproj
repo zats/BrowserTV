@@ -14,6 +14,8 @@
 		5C2F11FF1C2674DC00CE6988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F11FE1C2674DC00CE6988 /* Assets.xcassets */; };
 		5C2F12021C2674DC00CE6988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F12001C2674DC00CE6988 /* Main.storyboard */; };
 		5C2F12081C2679FC00CE6988 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2F12071C2679FC00CE6988 /* WebKit.framework */; };
+		5C3772A11C2A4342007A8CFD /* Website.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3772A01C2A4342007A8CFD /* Website.swift */; };
+		5C3772A21C2A4342007A8CFD /* Website.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3772A01C2A4342007A8CFD /* Website.swift */; };
 		5C468D4D1C25075100A87F81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D4C1C25075100A87F81 /* AppDelegate.swift */; };
 		5C468D4F1C25075100A87F81 /* TabSwitchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C468D4E1C25075100A87F81 /* TabSwitchingService.swift */; };
 		5C468D521C25075100A87F81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C468D501C25075100A87F81 /* Main.storyboard */; };
@@ -48,6 +50,7 @@
 		5C2F12071C2679FC00CE6988 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		5C2F12131C26826100CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		5C2F12161C2682A400CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
+		5C3772A01C2A4342007A8CFD /* Website.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Website.swift; path = Shared/Website.swift; sourceTree = "<group>"; };
 		5C468D491C25075100A87F81 /* BrowserTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C468D4C1C25075100A87F81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C468D4E1C25075100A87F81 /* TabSwitchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitchingService.swift; sourceTree = "<group>"; };
@@ -115,9 +118,18 @@
 			path = BrowserOSX;
 			sourceTree = "<group>";
 		};
+		5C37729F1C2A4330007A8CFD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5C3772A01C2A4342007A8CFD /* Website.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		5C468D401C25075100A87F81 = {
 			isa = PBXGroup;
 			children = (
+				5C37729F1C2A4330007A8CFD /* Shared */,
 				5C468D7C1C25085F00A87F81 /* Vendor */,
 				5C468D4B1C25075100A87F81 /* BrowserTV */,
 				5C2F11F91C2674DC00CE6988 /* BrowserOSX */,
@@ -356,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2F11FB1C2674DC00CE6988 /* AppDelegate.swift in Sources */,
+				5C3772A21C2A4342007A8CFD /* Website.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +381,7 @@
 				5C468D4F1C25075100A87F81 /* TabSwitchingService.swift in Sources */,
 				5C468D921C250FF200A87F81 /* MyWebView.m in Sources */,
 				5C468D741C25085D00A87F81 /* MainStore.swift in Sources */,
+				5C3772A11C2A4342007A8CFD /* Website.swift in Sources */,
 				5C468D801C25088000A87F81 /* AppState.swift in Sources */,
 				5C49436E1C29CB07007AE019 /* CommunicationService.swift in Sources */,
 				5C468D7A1C25085D00A87F81 /* Coding.swift in Sources */,
