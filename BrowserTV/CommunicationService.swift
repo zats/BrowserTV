@@ -57,7 +57,15 @@ extension CommunicationService: MySessionDelegate {
             assertionFailure("Received entity is not a valid website")
             return
         }
-        
+        store.dispatch(
+            Action(
+                type: ActionKind.Add.rawValue,
+                payload: [
+                    "URL": website.URL,
+                    "cookies": website.cookies
+                ]
+            )
+        )
     }
     
     func session(session: MySession, peer peerID: MyPeerID, didChangeState state: MySessionState) {
