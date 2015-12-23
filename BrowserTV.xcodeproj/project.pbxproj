@@ -48,7 +48,6 @@
 		5C2F12011C2674DC00CE6988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C2F12031C2674DC00CE6988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2F12071C2679FC00CE6988 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		5C2F12131C26826100CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		5C2F12161C2682A400CE6988 /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		5C3772A01C2A4342007A8CFD /* Website.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Website.swift; path = Shared/Website.swift; sourceTree = "<group>"; };
 		5C468D491C25075100A87F81 /* BrowserTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +112,6 @@
 				5C2F12001C2674DC00CE6988 /* Main.storyboard */,
 				5C2F12031C2674DC00CE6988 /* Info.plist */,
 				5C2F12071C2679FC00CE6988 /* WebKit.framework */,
-				5C2F12131C26826100CE6988 /* Bridging.h */,
 			);
 			path = BrowserOSX;
 			sourceTree = "<group>";
@@ -435,7 +433,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zats.BrowserOSX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = BrowserOSX/Bridging.h;
 			};
 			name = Debug;
 		};
@@ -451,7 +448,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zats.BrowserOSX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = BrowserOSX/Bridging.h;
 			};
 			name = Release;
 		};

@@ -95,21 +95,21 @@ extension WindowController: MCSessionDelegate {
         }
     }
     
-    public func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
-        
+    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
+        // no-op
     }
     
-    public func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
+    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        // no-op
     }
 
-    public func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
-        
+    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress) {
+        // no-op
     }
     
 
-    public func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
-        
+    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?) {
+        // no-op
     }
     
 }
@@ -125,7 +125,7 @@ class ViewController: NSViewController {
     }
 }
 
-extension NSHTTPCookieStorage {
+private extension NSHTTPCookieStorage {
     func deleteAllCookies() {
         if let cookies = cookies {
             for cookie in cookies {
