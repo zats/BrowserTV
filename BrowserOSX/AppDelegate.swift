@@ -45,14 +45,16 @@ class WindowController: NSWindowController {
         let website = Website(URL: URL, cookies: storage.cookies ?? [])
         let data = website.data
         connectedSessoins
-            .filter{!$0.connectedPeers.isEmpty}
+            .filter{
+                !$0.connectedPeers.isEmpty
+            }
             .forEach{ session in
                 do {
                     try session.sendData(data, toPeers: session.connectedPeers, withMode: .Reliable)
                 } catch {
                     assertionFailure()
                 }
-        }
+            }
     }
     
     @IBAction func textFieldAction(sender: AnyObject) {
