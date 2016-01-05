@@ -22,7 +22,7 @@ struct AppState: StateType {
 
     init() {
         self.init(
-            browser: BrowserState(switchInterval: 3, selectedTabIndex: nil, tabs: []),
+            browser: BrowserState(switchInterval: 7, selectedTabIndex: nil, tabs: []),
             preferences: PreferencesState(isVisible: false, URLs: []),
             timer: TimerState()
         )
